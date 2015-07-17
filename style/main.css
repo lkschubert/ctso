@@ -1,6 +1,7 @@
 body {
 	font-family: "helvetica", "arial";
 	font-weight: bold;
+	background-image: url("../res/background.png");
 }
 
 fieldset {
@@ -9,7 +10,6 @@ fieldset {
 
 .container {
   padding: 20px;
-  position: absolute;
   font-size: 10px;
   width: 700px;
   top: 50%;
@@ -20,10 +20,10 @@ fieldset {
   background-color: #fff;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 40px rgba(0, 0, 0, 0.08) inset;
   border-radius: 4px;
+  background-color: #D6DDE3
 }
 
 .container:before, .container:after {
-	position: absolute;
   z-index: -1;
   content: "";
 	width: 40%;

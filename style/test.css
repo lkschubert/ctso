@@ -8,7 +8,7 @@
   margin-left: -350px;
   margin-top: -200px;
   border: 1px solid #e8e8e8;
-  background-color: #fff;
+  background-color: #D6DDE3;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 40px rgba(0, 0, 0, 0.08) inset;
   border-radius: 4px;
 }
@@ -70,7 +70,7 @@
 
 .m-signature-pad--footer
   .description {
-    color: #C3C3C3;
+    color: #ACC7DC;
     text-align: center;
     font-size: 1.2em;
     margin-top: 1.8em;
