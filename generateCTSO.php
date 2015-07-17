@@ -5,8 +5,10 @@ if(!isset($_SESSION['login_user'])){
 	header("location: index.php");
 }
 require('./php/fpdf.php');
-require './php/PHPMailerAutoload.php';
+require('./php/PHPMailerAutoload.php');
 $ini_array = parse_ini_file("./config.ini", true);
+
+$_SESSION['signature'] = $_POST['signature'];
 
 $filename = $ini_array['CTSOGenerator']['targetDirectory'] . $_SESSION['umgNumber'] . '.pdf';
 
@@ -134,7 +136,7 @@ $ctso->MultiCell(0, 8, $text, 1);
 $ctso->AddPage();
 
 $imageFilename = $ini_array['CTSOGenerator']['signatureDirector'] . $_SESSION['umgNumber'] . ".png";
-$data_uri = $_POST['signature'];
+$data_uri = $_SESSION['signature'];
 $data_pieces = explode(",", $data_uri);
 $encoded_image = $data_pieces[1];
 $decoded_image = base64_decode($encoded_image);
@@ -153,7 +155,8 @@ $mail = new PHPMailer();
 //Enable SMTP debugging. 
 $mail->SMTPDebug = 3;                               
 //Set PHPMailer to use SMTP.
-$mail->isSMTP();            
+$mail->isSMTP();
+$mail->SMTPDebug = 0;             
 //Set SMTP host name                          
 $mail->Host = "smtp.gmail.com";
 //Set this to true if SMTP host requires authentication to send email
@@ -185,11 +188,11 @@ $mail->AltBody = file_get_contents($ini_array['EmailData']['altBodyFile']);
 
 if(!$mail->send()) 
 {
-	echo 'Whoops';
+	header("location: reattempt.php");
 } 
 else
 {
-    echo "Message has been sent successfully";
+    header("location: success.php");
 }
 
 ?>
