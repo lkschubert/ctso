@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 if(!isset($_SESSION['login_user'])){
@@ -11,7 +10,7 @@ if(isset($_POST['submit'])){
 	$accepted = array('customerName', 'customerEmail', 'umgNumber', 'accountName', 'csr', 'stoneColor', 'edge', 'thickness', 'backsplash',
 					'sinkModel', 'sinkType', 'sinkAtShop', 'sinkSupplied', 'sinkInLibrary', 'seams', 'powerOnSite',
 					'generatorNeeded', 'appliances', 'level', 'driveway', 'lockBox', 'removal', 'missingCabinets',
-					'dishwasherBrackets', 'comments');
+					'dishwasherBrackets', 'access',   'comments');
 	foreach ( $accepted as $name ) {
 		if ( isset( $_POST[$name] ) ) {
 			$_SESSION[$name] = $_POST[$name];
@@ -143,6 +142,9 @@ if(isset($_POST['submit'])){
 				<br /><br />
 				<label for="dishwasherBrackets">Dishwasher Brackets Needed</label><br />
 				<input type="checkbox" id="dishwasherBrackets" name="dishwasherBrackets" />
+				<br /><br />
+				<label for="access">Access</label><br />
+				<input type="text" id="access" name="access" required/>
 				<br /><br />
 				<label for="comments">Comments</label><br />
 				<textarea id="comments" name="comments"></textarea>

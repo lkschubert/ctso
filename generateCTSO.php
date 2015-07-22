@@ -123,17 +123,19 @@ $text = "";
 	} else {
 		$text = $text . "Dishwasher brackets are not needed\n";
 	}
+	
+	$text = "Accessible via " . $_SESSION['access'];
 $ctso->MultiCell(0, 8, $text, 1);
 $ctso->Ln();
 $ctso->Cell(0,8,"Comments", 1, 2, 'C');
 $ctso->Ln(0);
 $ctso->MultiCell(0, 8, $_SESSION['comments'], 1);
 $ctso->Ln();
+$ctso->AddPage();
 $ctso->Cell(0,8,"Disclaimers", 1, 2, 'C');
 $text = "The fabricators will take precautions and considerations when determining seam location. Considerations include, but are not limited to, customer wants, kitchen layout, site conditions, crew safety, material yield & cabinet structure. Although all seam location wants & needs are considered, the final placement of all seams that may be required is at the discretion of the fabicator.\n\n" .
 		"United Marble & Granite will not move nor help move any appliances including but not limited to stoves, refrigerators and dishwashers. At no time will United Marble & Granite make any alterations or adjustments to the job site including but not limited to cabinets, trim, flooring, windows or securing dishwashers. If adjustments need to be made to the job site or appliances need to be moved this is the responsibility of the customer and must be done prior to the installation. If there are pre-existing counter tops, the customer must check that the cabinets are level after removal and add any required supports." ;
 $ctso->MultiCell(0, 8, $text, 1);
-$ctso->AddPage();
 
 $imageFilename = $ini_array['CTSOGenerator']['signatureDirector'] . $_SESSION['umgNumber'] . ".png";
 $data_uri = $_SESSION['signature'];
