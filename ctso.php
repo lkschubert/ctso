@@ -144,7 +144,7 @@ if(isset($_POST['submit'])){
 				<input type="checkbox" id="dishwasherBrackets" name="dishwasherBrackets" />
 				<br /><br />
 				<label for="access">Access</label><br />
-				<input type="text" id="access" name="access" required/>
+				<input type="text" id="access" name="access" size="35" required/>
 				<br /><br />
 				<label for="comments">Comments</label><br />
 				<textarea id="comments" name="comments"></textarea>

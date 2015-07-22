@@ -124,19 +124,21 @@ $text = "";
 		$text = $text . "Dishwasher brackets are not needed\n";
 	}
 	
-	$text = "Accessible via " . $_SESSION['access'];
+	$text = $text . "Accessible via " . $_SESSION['access'];
 $ctso->MultiCell(0, 8, $text, 1);
 $ctso->Ln();
-$ctso->Cell(0,8,"Comments", 1, 2, 'C');
-$ctso->Ln(0);
-$ctso->MultiCell(0, 8, $_SESSION['comments'], 1);
+if($_SESSION['comments'] != ""){
+	$ctso->Cell(0,8,"Comments", 1, 2, 'C');
+	$ctso->Ln(0);
+	$ctso->MultiCell(0, 8, $_SESSION['comments'], 1);
+}
 $ctso->Ln();
 $ctso->AddPage();
 $ctso->Cell(0,8,"Disclaimers", 1, 2, 'C');
 $text = "The fabricators will take precautions and considerations when determining seam location. Considerations include, but are not limited to, customer wants, kitchen layout, site conditions, crew safety, material yield & cabinet structure. Although all seam location wants & needs are considered, the final placement of all seams that may be required is at the discretion of the fabicator.\n\n" .
 		"United Marble & Granite will not move nor help move any appliances including but not limited to stoves, refrigerators and dishwashers. At no time will United Marble & Granite make any alterations or adjustments to the job site including but not limited to cabinets, trim, flooring, windows or securing dishwashers. If adjustments need to be made to the job site or appliances need to be moved this is the responsibility of the customer and must be done prior to the installation. If there are pre-existing counter tops, the customer must check that the cabinets are level after removal and add any required supports." ;
 $ctso->MultiCell(0, 8, $text, 1);
-
+$ctso->Ln();
 $imageFilename = $ini_array['CTSOGenerator']['signatureDirector'] . $_SESSION['umgNumber'] . ".png";
 $data_uri = $_SESSION['signature'];
 $data_pieces = explode(",", $data_uri);
@@ -144,11 +146,15 @@ $encoded_image = $data_pieces[1];
 $decoded_image = base64_decode($encoded_image);
 file_put_contents( $imageFilename,$decoded_image);
 
+$xCoord = $ctso->GetX();
+$yCoord = $ctso->GetY();
 $ctso->Cell(0,8,"Signature", 1, 2, 'C');
 $ctso->Ln(0);
 date_default_timezone_set('UTC');
+$ctso->Image($imageFilename, null, null, 0, 20);
+$ctso->SetX($xCoord);
+$ctso->SetY($yCoord);
 $ctso->Cell(0,20, date('l jS \of F Y h:i:s A'),1, 0, 'R');
-$ctso->Image($imageFilename,	10, 15, 0, 30);
 $ctso->Output($filename, 'F');
 
 $mail = new PHPMailer();
